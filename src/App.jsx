@@ -30,10 +30,10 @@ function App() {
     if (score > currentBlind) {
       setRoundWin(true);
     }
-    if (plays?.hands == 0) {
+    if (plays?.hands == 0 && score < currentBlind) {
       setRoundWin("Lose");
     }
-  }, [hand]);
+  }, [plays, score]);
 
   const initializeDeck = () => {
     let cards = playingCard;
@@ -59,8 +59,6 @@ function App() {
     setRoundWin(false);
     setGameState(null);
   };
-
-  console.log(gameState);
 
   const addCardToHand = (card) => {
     if (hand.length < 5 && !hand.includes(card)) {
