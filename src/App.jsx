@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { playingCard, typesValue } from "./Cards/playingCard.js";
 import { useEffect } from "react";
+import Cards from "./Cards.jsx";
 
 function App() {
   const [deck, setDeck] = useState([]);
@@ -356,7 +357,7 @@ function App() {
     }
     return false;
   };
-
+  console.log(hand);
   return (
     <div className="flex flex-col justify-center gap-10 items-center">
       <h1 className="text-center font-bold p-4 text-3xl">Balatro</h1>
@@ -415,23 +416,12 @@ function App() {
           </div>
         </div>
         <div className="flex flex-col h-48 justify-between gap-8">
-          <div className=" flex flex-row gap-6">
-            {[...Array(numberOfCards)].map((e, i) =>
-              deck[i]?.discard == false ? (
-                <img
-                  className="border-4 scale-110 hover:scale-[1.15] max-h-[100px] cursor-pointer transition-all p-[1px] rounded-md border-black max-w-[69px]"
-                  src={deck[i]?.img}
-                  key={i}
-                  onClick={() => addCardToHand(deck[i])}
-                  style={{
-                    transform: deck[i]?.active
-                      ? "translateY(-20px)"
-                      : "translateY(0px)",
-                  }}
-                />
-              ) : null
-            )}
-          </div>
+          <Cards
+            deck={deck}
+            addCardToHand={addCardToHand}
+            numberOfCards={numberOfCards}
+          />
+
           <div className="flex flex-row justify-center gap-4">
             <button
               onClick={handleCheckHand}
